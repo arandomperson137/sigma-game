@@ -1,14 +1,24 @@
-class game{
+class Game{
    constructor(canvas, context) {
     this.canvas = canvas;
     this.ctx = context
     this.width = this.canvas.width;
     this.height = this.canvas.height;
+    this.Player = new Player(this);
+
+    window.addEventListener('resize', function(e) {
+    console.log(e);
+    this.canvas.width = e.currentTarget.innerWidth;
+    this.canvas.height = e.currentTarget.innerHeight;
+    this.width = this.canvas.width;
+    this.height = this.canvas.height;
+    });
    }
 
 render() {
     this.ctx.fillStyle = 'red';
-    this.ctxfillRect(100, 100, 50, 150);
+    this.Player.update();
+    this.Player.draw();
 }
 }
 
@@ -18,6 +28,13 @@ window.addEventListener('load', function() {
     canvas.width = 720;
     canvas.height = 720;
 
-    const game = new game (canvas, ctx)
-    game.render();
+    const game = new Game(canvas, ctx)
+    
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        game.render();
+        requestAnimationFrame(animate);
+    }
+
+    requestAnimationFrame(animate);
 });
