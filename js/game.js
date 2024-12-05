@@ -4,19 +4,30 @@ class Game{
     this.ctx = context
     this.width = this.canvas.width;
     this.height = this.canvas.height;
+    this.ratio = this.height / this.baseHeight;
     this.Player = new Player(this);
 
-    window.addEventListener('resize', function(e) {
-    console.log(e);
-    this.canvas.width = e.currentTarget.innerWidth;
-    this.canvas.height = e.currentTarget.innerHeight;
+    this.rezise(window.innerWidth, window.innerHeight);
+
+    window.addEventListener('resize', e => {
+        this.resize(e.currentTarget.innerWidth, e.currentTarget.innerHeight);
+    });
+}
+    resize(width, height)  {
+    this.canvas.width = width;
+    this.canvas.height = height;
     this.width = this.canvas.width;
     this.height = this.canvas.height;
-    });
+    this.ctx.fillstyle ='#5995F2'
+    this.ratio = this.height / this.baseheight;
+    console.log(this.height, this.baseheight, this.ratio);
+
+    this.Player.resize();
+    console.log(this.height, this.baseheight, this.ratio);
    }
 
 render() {
-    this.ctx.fillStyle = 'red';
+    //this.ctx.fillStyle = 'red';
     this.Player.update();
     this.Player.draw();
 }
