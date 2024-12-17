@@ -1,51 +1,52 @@
-class Game{
-   constructor(canvas, context) {
-    this.canvas = canvas;
-    this.ctx = context
-    this.width = this.canvas.width;
-    this.height = this.canvas.height;
-    this.ratio = this.height / this.baseHeight;
-    this.Player = new Player(this);
+class Game {
+    constructor(canvas, context){
+        this.canvas = canvas;
+        this.ctx = context;
+        this.width = this.canvas.width;
+        this.height = this.canvas.height
+        this.baseHeight = 720;
+        this.ratio = this.height.height / this.baseHeight
+        this.player = new Player(this);
+        this.gravity = 1;
 
-    this.rezise(window.innerWidth, window.innerHeight);
+        this.resize(window.innerwidth, window.innerheight)
 
-    window.addEventListener('resize', e => {
-        this.resize(e.currentTarget.innerWidth, e.currentTarget.innerHeight);
-    });
-}
-    resize(width, height)  {
-    this.canvas.width = width;
-    this.canvas.height = height;
-    this.width = this.canvas.width;
-    this.height = this.canvas.height;
-    this.ctx.fillstyle ='#5995F2'
-    this.ratio = this.height / this.baseheight;
-    console.log(this.height, this.baseheight, this.ratio);
+        window.addEventListener('resize', e=> {
+            this.resize(e.currentTarget.innerheight, e.currentTarget.innerwidth);
+        })
+    }
 
-    this.Player.resize();
-    console.log(this.height, this.baseheight, this.ratio);
-   }
+        resize(width, height)   {
+            this.canvas.height = height;
+            this.canvas.width = width;
+            this.width = this.canvas.width;
+            this.height = this.canvas.height;
+            this.ctx.fillStyle = '#5995F2';
+            this.ratio = this.height / this.baseHeight;
+            this.player.resize();
+            console.log(this.height, this.baseHeight, this.ratio)
 
-render() {
-    //this.ctx.fillStyle = 'red';
-    this.Player.update();
-    this.Player.draw();
-}
+
+    }
+
+    render() {
+        this.player.draw
+        this.player.update();
+    }
 }
 
 window.addEventListener('load', function() {
-    const canvas = document.getElementById('game-layout');
-    const ctx = canvas.getContext('2d');
+    const canvas = document-getElementById('game-layout');
+    const ctx = canvas-getContext('2d');
     canvas.width = 720;
     canvas.height = 720;
 
-    const game = new Game(canvas, ctx)
-    
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const game = new Game (canvas,etc);
+    function animate () {
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
         game.render();
-        requestAnimationFrame(animate);
+        requestAnimationFrame(animated);
     }
-
-    requestAnimationFrame(animate);
+    
+    this.requestAnimationFrame(animate);
 });
